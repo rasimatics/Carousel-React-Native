@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, FlatList, Dimensions, Image, View } from 'react-native';
+import Card from './components/Card'
 
 export default function App() {
   const [selected, setSelected] = useState(0)
@@ -29,8 +30,8 @@ export default function App() {
         onMomentumScrollEnd={changePosition}
         onMomentumScrollBegin={changePosition}
         data={sources}
-        renderItem={({ item }) => {
-          return <Image source={item} style={{ width: width, height: height }} />
+        renderItem={({ item,index }) => {
+          return <Card key={index} id={index} item={item} width={width} height={height}/>
         }}
       />
 
