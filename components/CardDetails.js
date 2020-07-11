@@ -1,11 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 
-export default function CardDetails() {
-
+export default function CardDetails(props) {
     return (
         <View style={styles.container}>
-          <TouchableHighlight><Text>{}</Text></TouchableHighlight>
+          <TouchableHighlight><Text>{props.route.params.id}</Text></TouchableHighlight>
         </View >
     );
 }

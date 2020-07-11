@@ -3,6 +3,7 @@ import { StyleSheet, Image, View, Text, ImageBackground, TouchableHighlight } fr
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function Card({ item, width, height, id, navigation }) {
+    const myId = id +1 // for starting from 1
     return (
         <View>
             <TouchableHighlight>
@@ -11,10 +12,10 @@ export default function Card({ item, width, height, id, navigation }) {
                     resizeMode="cover"
                     blurRadius={3}
                     style={{ width: width, height: height }} >
-                    <TouchableOpacity onPress={()=>navigation.navigate('CardDetails')}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('CardDetails',{id:myId})}>
                         <Image source={item} style={styles.image} />
                         <View style={styles.textContainer}>
-                            <Text style={styles.text}>{id + 1}</Text>
+                            <Text style={styles.text}>{myId}</Text>
                         </View>
                     </TouchableOpacity>
                 </ImageBackground>

@@ -8,14 +8,20 @@ import CardDetails from '../components/CardDetails'
 const Stack = createStackNavigator()
 
 function MainStackNavigator() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen options={{ headerShown: false }} name='Home' component={Home} />
-        <Stack.Screen name='CardDetails' component={CardDetails} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  )
+    return (
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen options={{ headerShown: false }} name='Home' component={Home} />
+                <Stack.Screen options={{
+                    headerTitle: "My Header",
+                    headerStyle: {
+                        backgroundColor: '#21254D',
+                    },
+                    headerTintColor: '#fff',
+                }} name='CardDetails' component={CardDetails} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    )
 }
 
 export default MainStackNavigator
