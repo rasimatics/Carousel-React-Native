@@ -1,21 +1,29 @@
-import React, { useState } from 'react';
-import { Button, Text, View, ScrollView, StyleSheet,FlatList,Dimensions } from 'react-native';
+import React, { useState,useRef } from 'react';
+import { Button, Text, View, ScrollView, StyleSheet,FlatList,Dimensions, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/Entypo';
 import TextCard from './TextCard'
 
+
 export default function ModalTester() {
 	const [isModalVisible, setModalVisible] = useState(false);
-
 	const [data, setData] = useState([1,2,3,4,5,6,7,8,9,10])
+
+	let flatlist = useRef(null)
 
 	const toggleModal = () => {
 		setModalVisible(!isModalVisible);
 	};
 
+	const scroll = (index) => {
+		flatlist.scrollToIndex({animated:true,index:index})
+		setModalVisible(false)
+	}
+
 	return (
 		<View style={{ flex: 1 }}>
 			<FlatList
+				ref={(ref)=>flatlist = ref}
 				horizontal
 				pagingEnabled
 				data={data}
@@ -30,9 +38,10 @@ export default function ModalTester() {
 			<Modal onBackdropPress={toggleModal} style={styles.modal} isVisible={isModalVisible}>
 				<ScrollView horizontal>
 					{data.map((item, index) => (
-						<View key={index} style={styles.listitem}>
+
+						<TouchableOpacity key={index} onPress={()=>scroll(index)} style={styles.listitem} >
 							<Text>{item}</Text>
-						</View>
+						</TouchableOpacity>
 					))}
 				</ScrollView>
 			</Modal>
@@ -61,6 +70,7 @@ const styles = StyleSheet.create({
 	listitem: {
 		padding: 10,
 		margin: 10,
+		height:130,
 		width: 130,
 		backgroundColor: '#9b9b9b',
 	},
