@@ -1,5 +1,5 @@
 import React, { useState,useRef } from 'react';
-import { Button, Text, View, ScrollView, StyleSheet,FlatList,Dimensions, TouchableOpacity } from 'react-native';
+import { Text, View, ScrollView, StyleSheet,FlatList, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/Entypo';
 import TextCard from './TextCard'
