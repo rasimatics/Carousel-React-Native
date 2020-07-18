@@ -1,13 +1,30 @@
-import React, { useState,useRef } from 'react';
-import { Text, View, ScrollView, StyleSheet,FlatList, TouchableOpacity } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { Text, View, ScrollView, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/Entypo';
 import TextCard from './TextCard'
+import ShareModal from './ShareModal';
+import IconA from 'react-native-vector-icons/Entypo'
+import IconB from 'react-native-vector-icons/MaterialIcons'
 
 
-export default function ModalTester() {
+export default function CardDetails(props) {
+
+	const { navigation } = props
+	React.useLayoutEffect(() => {
+		navigation.setOptions({
+			headerRight: () => (
+				<View style={{ display: 'flex', flexDirection: 'row' }}>
+					<IconA name="share" style={styles.icon} size={30} color={'#fff'} onPress={toggleModal2} />
+					<IconB name="settings" style={styles.icon} size={30} color={'#fff'} />
+				</View>
+			)
+		})
+	})
 	const [isModalVisible, setModalVisible] = useState(false);
-	const [data, setData] = useState([1,2,3,4,5,6,7,8,9,10])
+	const [isModalVisible2, setModalVisible2] = useState(false);
+
+	const [data, setData] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 
 	let flatlist = useRef(null)
 
@@ -15,15 +32,20 @@ export default function ModalTester() {
 		setModalVisible(!isModalVisible);
 	};
 
+	const toggleModal2 = () => {
+		setModalVisible2(!isModalVisible2);
+	};
+
+
 	const scroll = (index) => {
-		flatlist.scrollToIndex({animated:true,index:index})
+		flatlist.scrollToIndex({ animated: true, index: index })
 		setModalVisible(false)
 	}
 
 	return (
 		<View style={{ flex: 1 }}>
 			<FlatList
-				ref={(ref)=>flatlist = ref}
+				ref={(ref) => flatlist = ref}
 				horizontal
 				pagingEnabled
 				data={data}
@@ -39,12 +61,15 @@ export default function ModalTester() {
 				<ScrollView horizontal>
 					{data.map((item, index) => (
 
-						<TouchableOpacity key={index} onPress={()=>scroll(index)} style={styles.listitem} >
+						<TouchableOpacity key={index} onPress={() => scroll(index)} style={styles.listitem} >
 							<Text>{item}</Text>
 						</TouchableOpacity>
 					))}
 				</ScrollView>
 			</Modal>
+
+			<ShareModal isModalVisible={isModalVisible2} toggleModal={toggleModal2} />
+
 		</View>
 	);
 }
@@ -70,8 +95,11 @@ const styles = StyleSheet.create({
 	listitem: {
 		padding: 10,
 		margin: 10,
-		height:130,
+		height: 130,
 		width: 130,
 		backgroundColor: '#9b9b9b',
 	},
+	icon: {
+		padding: 10,
+	}
 });
