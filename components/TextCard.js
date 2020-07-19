@@ -5,7 +5,7 @@ export default function Card({ index, item }) {
     const { width, height } = Dimensions.get('window')
     return (
         <View key={index}>
-            <View  style={{width:width,height:height}}>
+            <View  style={{width:width,height:height,alignItems:'center'}}>
                 <Text style={{color:'#000',fontSize:30}}>{item}</Text>
             </View>
         </View>

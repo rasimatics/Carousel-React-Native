@@ -28,6 +28,7 @@ export default function Home(props) {
     <View style={styles.container}>
       <FlatList
         style={{ flex: 1 }}
+        showsHorizontalScrollIndicator={false}
         horizontal
         pagingEnabled
         onMomentumScrollEnd={changePosition}
@@ -40,7 +41,7 @@ export default function Home(props) {
 
       <View style={styles.balls}>
         {sources.map((source, index) =>
-          <View style={[styles.ball, index === selected && { opacity: 0.3, width: 13, height: 13 }]}></View>)
+          <View style={[styles.ball, index === selected && { opacity: 0.3, width: 8, height: 8 }]}></View>)
         }
       </View>
     </View >
@@ -62,8 +63,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   ball: {
-    width: 10,
-    height: 10,
+    width: 5,
+    height: 5,
     borderRadius: 10,
     backgroundColor: '#fff',
     marginRight: 5,

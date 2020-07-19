@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Text, View, ScrollView, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { Text, View, ScrollView, StyleSheet, FlatList, TouchableOpacity,TouchableHighlight } from 'react-native';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/Entypo';
 import TextCard from './TextCard'
@@ -74,8 +74,8 @@ export default function CardDetails(props) {
 		navigation.setOptions({
 			headerRight: () => (
 				<View style={{ display: 'flex', flexDirection: 'row' }}>
-					<IconA name="share" style={styles.icon} size={30} color={'#fff'} onPress={()=>toggleModal('share')} />
-					<IconB name="settings" style={styles.icon} size={30} color={'#fff'} onPress={()=>toggleModal('settings')} />
+					<IconA name="share" style={styles.icon} size={25} color={'#fff'} onPress={() => toggleModal('share')} />
+					<IconB name="settings" style={styles.icon} size={25} color={'#fff'} onPress={() => toggleModal('settings')} />
 				</View>
 			)
 		})
@@ -85,6 +85,7 @@ export default function CardDetails(props) {
 		<View style={{ flex: 1 }}>
 			<FlatList
 				ref={(ref) => flatlist = ref}
+				showsHorizontalScrollIndicator={false}
 				horizontal
 				pagingEnabled
 				data={data}
@@ -93,11 +94,12 @@ export default function CardDetails(props) {
 				}}
 			/>
 
+			<TouchableHighlight style={styles.menu} onPress={() => toggleModal('menu')}>
+				<Icon name="menu" size={27} color={'#fff'} />
+			</TouchableHighlight>
 
-			<Icon style={styles.menu} name="menu" size={25} onPress={()=>toggleModal('menu')} color={'#fff'} />
-
-			<Modal onBackdropPress={()=>toggleModal('menu')} style={styles.modal} isVisible={isModalVisible}>
-				<ScrollView horizontal>
+			<Modal onBackdropPress={() => toggleModal('menu')} style={styles.modal} isVisible={isModalVisible}>
+				<ScrollView horizontal showsHorizontalScrollIndicator={false}>
 					{data.map((item, index) => (
 
 						<TouchableOpacity key={index} onPress={() => scroll(index)} style={styles.listitem} >
@@ -115,13 +117,12 @@ export default function CardDetails(props) {
 
 const styles = StyleSheet.create({
 	menu: {
-		padding: 10,
-		backgroundColor: '#21254D',
-		borderRadius: 30,
-		width: 45,
 		position: 'absolute',
 		bottom: 15,
 		right: 15,
+		padding: 15,
+		backgroundColor: '#21254D',
+		borderRadius: 30,
 	},
 	modal: {
 		width: '100%',
@@ -139,6 +140,6 @@ const styles = StyleSheet.create({
 		backgroundColor: '#9b9b9b',
 	},
 	icon: {
-		padding: 10,
+		padding: 15,
 	}
 });

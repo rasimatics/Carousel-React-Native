@@ -26,7 +26,7 @@ export default function SettingsModal({ isModalVisible, toggleModal, arabic, tra
                 <Icon name='plus' style={styles.plus} size={35} onPress={()=>changeSize('trans','inc')}/>
             </View>
 
-            <View style={styles.container}>
+            <View style={[styles.container,{borderBottomWidth:0}]}>
                 <Icon name='minus' style={styles.minus} size={35} onPress={()=>changeSize('translate','dec')}/>
                 <View>
                     <Text style={styles.number}>{translate}</Text>
