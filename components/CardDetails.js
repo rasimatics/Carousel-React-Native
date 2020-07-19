@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Text, View, ScrollView, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/Entypo';
@@ -6,41 +6,80 @@ import TextCard from './TextCard'
 import ShareModal from './ShareModal';
 import IconA from 'react-native-vector-icons/Entypo'
 import IconB from 'react-native-vector-icons/MaterialIcons'
+import SettingsModal from './SettingsModal';
 
 
 export default function CardDetails(props) {
 
 	const { navigation } = props
-	React.useLayoutEffect(() => {
-		navigation.setOptions({
-			headerRight: () => (
-				<View style={{ display: 'flex', flexDirection: 'row' }}>
-					<IconA name="share" style={styles.icon} size={30} color={'#fff'} onPress={toggleModal2} />
-					<IconB name="settings" style={styles.icon} size={30} color={'#fff'} />
-				</View>
-			)
-		})
-	})
+
 	const [isModalVisible, setModalVisible] = useState(false);
 	const [isModalVisible2, setModalVisible2] = useState(false);
+	const [isModalVisible3, setModalVisible3] = useState(false);
 
+	// setting modal state
+	const [arabic, setArabic] = useState(16)
+	const [trans, setTrans] = useState(16)
+	const [translate, setTranslate] = useState(16)
+
+	// datas
 	const [data, setData] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 
+
+	// menu button bottom modal
+	const toggleModal = (type => {
+		if (type == 'menu')
+			setModalVisible(!isModalVisible);
+		else if (type == 'share')
+			setModalVisible2(!isModalVisible2);
+		else
+			setModalVisible3(!isModalVisible3);
+
+	})
+
+	const changeSize = (name, type) => {
+		if (name == 'arabic') {
+			if (type == 'inc') {
+				setArabic((prev) => prev + 2)
+			}
+			else
+				setArabic((prev) => prev - 2)
+		}
+
+		else if (name == 'trans') {
+			if (type == 'inc') {
+				setTrans((prev) => prev + 2)
+			}
+			else
+				setTrans((prev) => prev - 2)
+		}
+		// name == 'translate'
+		else {
+			if (type == 'inc') {
+				setTranslate((prev) => prev + 2)
+			}
+			else
+				setTranslate((prev) => prev - 2)
+		}
+	}
+
 	let flatlist = useRef(null)
-
-	const toggleModal = () => {
-		setModalVisible(!isModalVisible);
-	};
-
-	const toggleModal2 = () => {
-		setModalVisible2(!isModalVisible2);
-	};
-
 
 	const scroll = (index) => {
 		flatlist.scrollToIndex({ animated: true, index: index })
 		setModalVisible(false)
 	}
+
+	useEffect(() => {
+		navigation.setOptions({
+			headerRight: () => (
+				<View style={{ display: 'flex', flexDirection: 'row' }}>
+					<IconA name="share" style={styles.icon} size={30} color={'#fff'} onPress={()=>toggleModal('share')} />
+					<IconB name="settings" style={styles.icon} size={30} color={'#fff'} onPress={()=>toggleModal('settings')} />
+				</View>
+			)
+		})
+	})
 
 	return (
 		<View style={{ flex: 1 }}>
@@ -55,9 +94,9 @@ export default function CardDetails(props) {
 			/>
 
 
-			<Icon style={styles.menu} name="menu" size={25} onPress={toggleModal} color={'#fff'} />
+			<Icon style={styles.menu} name="menu" size={25} onPress={()=>toggleModal('menu')} color={'#fff'} />
 
-			<Modal onBackdropPress={toggleModal} style={styles.modal} isVisible={isModalVisible}>
+			<Modal onBackdropPress={()=>toggleModal('menu')} style={styles.modal} isVisible={isModalVisible}>
 				<ScrollView horizontal>
 					{data.map((item, index) => (
 
@@ -68,8 +107,8 @@ export default function CardDetails(props) {
 				</ScrollView>
 			</Modal>
 
-			<ShareModal isModalVisible={isModalVisible2} toggleModal={toggleModal2} />
-
+			<ShareModal isModalVisible={isModalVisible2} toggleModal={toggleModal} />
+			<SettingsModal isModalVisible={isModalVisible3} toggleModal={toggleModal} changeSize={changeSize} arabic={arabic} trans={trans} translate={translate} />
 		</View>
 	);
 }
