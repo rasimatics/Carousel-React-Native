@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Text, View, ScrollView, StyleSheet, FlatList, TouchableOpacity,TouchableHighlight } from 'react-native';
+import { Text, View, ScrollView, StyleSheet, FlatList, TouchableOpacity, TouchableHighlight } from 'react-native';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/Entypo';
 import TextCard from './TextCard'
@@ -23,7 +23,16 @@ export default function CardDetails(props) {
 	const [translate, setTranslate] = useState(16)
 
 	// datas
-	const [data, setData] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+	const [data, setData] = useState([
+		{ "id": "1", "data": "1" },
+		{ "id": "2", "data": "2" }, 
+		{ "id": "3", "data": "3" }, 
+		{ "id": "4", "data": "4" },
+		{ "id": "5", "data": "5" },
+		{ "id": "6", "data": "6" }, 
+		{ "id": "7", "data": "7" }, 
+		{ "id": "8", "data": "8" },
+	])
 
 
 	// menu button bottom modal
@@ -90,7 +99,7 @@ export default function CardDetails(props) {
 				pagingEnabled
 				data={data}
 				renderItem={({ item, index }) => {
-					return (<TextCard key={index} item={item} index={index} />)
+					return (<TextCard key={index} item={item['data']} index={index} />)
 				}}
 			/>
 
@@ -103,7 +112,7 @@ export default function CardDetails(props) {
 					{data.map((item, index) => (
 
 						<TouchableOpacity key={index} onPress={() => scroll(index)} style={styles.listitem} >
-							<Text>{item}</Text>
+							<Text>{item['data']}</Text>
 						</TouchableOpacity>
 					))}
 				</ScrollView>

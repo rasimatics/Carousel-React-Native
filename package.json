@@ -20,8 +20,10 @@
     "react-native-raw-bottom-sheet": "^2.2.0",
     "react-native-safe-area-context": "0.7.3",
     "react-native-screens": "~2.2.0",
+    "react-native-uuid": "^1.4.9",
     "react-native-vector-icons": "^7.0.0",
-    "react-native-web": "~0.11.7"
+    "react-native-web": "~0.11.7",
+    "uuid": "^8.2.0"
   },
   "devDependencies": {
     "babel-preset-expo": "~8.1.0",

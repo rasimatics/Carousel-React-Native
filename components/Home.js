@@ -8,12 +8,13 @@ export default function Home(props) {
 
   const [selected, setSelected] = useState(0)
   const { width, height } = Dimensions.get('window');
+
   const sources = [
-    require('../images/1.jpeg'),
-    require('../images/2.jpeg'),
-    require('../images/3.jpeg'),
-    require('../images/4.jpeg'),
-    require('../images/5.jpeg'),
+    {"id":"1", "image":require('../images/1.jpeg')},
+    {"id":"2", "image":require('../images/2.jpeg')},
+    {"id":"3", "image":require('../images/3.jpeg')},
+    {"id":"4", "image":require('../images/4.jpeg')},
+    {"id":"5", "image":require('../images/5.jpeg')},
   ]
 
   const changePosition = (e) => {
@@ -21,7 +22,6 @@ export default function Home(props) {
     const index = Math.ceil(offset / width)
     setSelected(index)
   };
-
 
 
   return (
@@ -35,7 +35,7 @@ export default function Home(props) {
         onMomentumScrollBegin={changePosition}
         data={sources}
         renderItem={({ item,index }) => {
-          return <Card key={index} id={index} item={item} width={width} height={height} navigation={navigation}/>
+          return <Card id={index} item={item['image']} width={width} height={height} navigation={navigation}/>
         }}
       />
 

@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, Image, View, Text, ImageBackground, TouchableHighlight } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { StyleSheet, Image, View, Text, ImageBackground, TouchableHighlight,TouchableOpacity } from 'react-native';
 
 export default function Card({ item, width, height, id, navigation }) {
     const myId = id +1 // for starting from 1
