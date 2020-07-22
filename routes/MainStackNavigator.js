@@ -3,7 +3,6 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import Home from '../components/Home'
 import CardDetails from '../components/CardDetails'
-import { View, StyleSheet } from 'react-native'
 
 const Stack = createStackNavigator()
 
@@ -13,7 +12,7 @@ function MainStackNavigator() {
             <Stack.Navigator>
                 <Stack.Screen options={{ headerShown: false }} name='Home' component={Home} />
                 <Stack.Screen options={{
-                    headerTitle: "Namazvdom",
+                    headerTitle: "Carousel",
                     headerTitleStyle: {
                         color: "#fff"
                     },

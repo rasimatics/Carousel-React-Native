@@ -27,7 +27,7 @@ export default function Home(props) {
   return (
     <View style={styles.container}>
       <FlatList
-        style={{ flex: 1 }}
+        style={{ flex: 1}}
         showsHorizontalScrollIndicator={false}
         horizontal
         pagingEnabled

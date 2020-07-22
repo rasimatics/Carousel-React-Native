@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "NamazApp",
-    "slug": "NamazApp",
+    "name": "Carousel",
+    "slug": "Carousel",
     "platforms": [
       "ios",
       "android",
